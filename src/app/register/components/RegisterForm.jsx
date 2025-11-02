@@ -1,20 +1,34 @@
 "use client";
 import { registerUser } from "@/app/actions/auth/registerUser";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const payload = { name, email, password };
-    // console.log(payload);
-    await registerUser(payload);
-    form.reset();
+
+    toast.loading("Submitting...", { id: "register" });
+
+    const response = await registerUser({ name, email, password });
+
+    toast.dismiss("register");
+
+    if (response.success) {
+      toast.success(response.message);
+      router.push("/")
+      form.reset();
+
+    } else {
+      toast.error(response.message);
+    }
   };
   return (
     <div className="relative bg-white/10 backdrop-blur-lg border border-gray-500/30 shadow-2xl rounded-2xl p-8 w-full max-w-md text-white">

@@ -13,7 +13,7 @@ const LoginForm = () => {
 
     const email = form.email.value;
     const password = form.password.value;
-    toast("submiting......")
+    toast("submiting......");
     // const payload = { email, password };
     // console.log(payload);
     try {
@@ -24,18 +24,16 @@ const LoginForm = () => {
         redirect: false,
       });
       if (response.ok) {
-        toast.success("Loged In Successfully")
+        toast.success("Loged In Successfully");
         router.push("/");
         form.reset();
       } else {
-        toast.success("Failed to Loged In!")
+        toast.error("Failed to Log In!");
       }
     } catch (error) {
-      console.log(error);
-      alert("authentication fialed!");
+      //   console.log(error);
+      toast.error("Failed to Log In!");
     }
-
-    // form.reset();
   };
   return (
     <div className="relative bg-white/10 backdrop-blur-lg border border-gray-500/30 shadow-2xl rounded-2xl p-8 w-full max-w-md text-white">
