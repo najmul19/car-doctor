@@ -57,6 +57,9 @@ export default function Navbar() {
                 Contact
               </a>
             </li>
+            <Link href={"/register"}>
+               Register
+            </Link>
           </ul>
 
           {/* right: icons + appointment */}

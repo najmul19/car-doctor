@@ -8,7 +8,7 @@ const ServiceDetailsPage = async ({ params }) => {
   const servicesCollection = dbConnect(collectionNamesObj.servicesCollection);
   const data = await servicesCollection.findOne({ _id: new ObjectId(p.id) });
   return (
-    <div>
+    <div className="w-[1140px]">
       <section className="flex justify-center">
         <figure className="relative  ">
           <Image
@@ -26,8 +26,19 @@ const ServiceDetailsPage = async ({ params }) => {
           </div>
         </figure>
       </section>
-      <section>
-        <Image src={data.img} width={400} height={280} alt={data.title}></Image>
+      <section className="grid grid-cols-12 mt-5">
+        <div className="mx-auto col-span-9">
+          <Image
+            src={data.img}
+            width={900}
+            height={280}
+            alt={data.title}
+          ></Image>
+        </div>
+        <div className="ms-4 col-span-3 ">
+          <button className="bg-orange-400 w-full">checkout</button>
+          <h1 className="font-bold text-center text-2xl mt-2">Price: $ {data.price}</h1>
+        </div>
       </section>
       {p.id}
       <p>{JSON.stringify(data)}</p>
