@@ -1,5 +1,5 @@
-// components/Navbar.jsx
 "use client";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  const { data: session, status } = useSession();
   return (
     <header className="bg-white">
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,8 +26,6 @@ export default function Navbar() {
                 height={40}
                 className="h-10 w-auto"
               />
-
-              
             </Link>
           </div>
 
@@ -57,9 +56,16 @@ export default function Navbar() {
                 Contact
               </a>
             </li>
-            <Link href={"/register"}>
-               Register
-            </Link>
+            {status == "authenticated" ? (
+              <li onClick={() => signOut()}>LogOut</li>
+            ) : (
+              <>
+                <Link href={"/register"}>Register</Link>
+                <Link href={"/login"}>Login</Link>
+              </>
+            )}
+
+            {/* <Link href={"/register"}>Register</Link> */}
           </ul>
 
           {/* right: icons + appointment */}
@@ -179,6 +185,7 @@ export default function Navbar() {
               Appointment
             </a>
           </li>
+          <Link href={"/register"}>Register</Link>
         </ul>
       </div>
     </header>

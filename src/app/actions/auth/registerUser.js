@@ -7,15 +7,16 @@ export const registerUser = async (payload) => {
   const userCollection = dbConnect(collectionNamesObj.userCollection);
   //   validation
   const { email, password } = payload;
-  if (!email || !password) return { success: false };
+  if (!email || !password) return null;
   const user = await userCollection.findOne({ email: payload.email });
   if (!user) {
     const hashPassword = await bcrypt.hash(password, 10);
     payload.password = hashPassword;
-    const result = userCollection.insertOne(payload);
-    const { acknowledged, insertedId } = result;
-    return { acknowledged, insertedId };
+    const result = await userCollection.insertOne(payload);
+    // const { acknowledged, insertedId } = result;
+    result.insertedId = result.insertedId.toString();
+    return result;
   } else {
-    return { success: false };
+    return null;
   }
 };
