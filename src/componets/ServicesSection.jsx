@@ -1,5 +1,6 @@
 import dbConnect, { collectionNamesObj } from "@/lib/dbConnect";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ServicesSection = async () => {
@@ -18,19 +19,16 @@ const ServicesSection = async () => {
           >
             {/* {JSON.stringify(data)} */}
             <figure className="w-full h-3/4 flex justify-center items-center">
-              <Image
-                src={item.img}
-                width={314}
-                height={208}
-                alt={item.title}
-              />
+              <Image src={item.img} width={314} height={208} alt={item.title} />
             </figure>
             <div className="flex justify-between items-center mt-4">
               <div>
                 <h1>{item.title}</h1>
                 <p>{item.price}</p>
               </div>
-              <div>--</div>
+              <div>
+                <Link className="text-orange-500" href={`/services/${item._id}`}>--</Link>
+              </div>
             </div>
           </div>
         );
