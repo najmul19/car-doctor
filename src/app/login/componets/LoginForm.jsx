@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import SocialLogin from "./SocialLogin";
+
 const LoginForm = () => {
   const router = useRouter();
   const handleSubmit = async (e) => {
@@ -81,17 +82,8 @@ const LoginForm = () => {
       </div>
 
       {/* Social Login Buttons */}
-      <div className="flex justify-center space-x-6 text-2xl">
-        <button className="hover:scale-110 text-blue-500 transition">
-          <FaFacebook />
-        </button>
-        <button className="hover:scale-110 text-gray-200 transition">
-          <FaGithub />
-        </button>
-        <button className="hover:scale-110 text-red-500 transition">
-          <FaGoogle />
-        </button>
-      </div>
+
+      <SocialLogin></SocialLogin>
 
       {/* Register Link */}
       <p className="text-center text-gray-300 text-sm mt-6">

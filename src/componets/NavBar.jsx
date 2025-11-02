@@ -57,7 +57,12 @@ export default function Navbar() {
               </a>
             </li>
             {status == "authenticated" ? (
-              <li onClick={() => signOut()}>LogOut</li>
+              <>
+              <li>
+                <Image src={session?.user?.image} width={20} height={20} alt="user logo" />
+              </li>
+              <button className="cursor-pointer" onClick={() => signOut()}>LogOut</button>
+              </>
             ) : (
               <>
                 <Link href={"/register"}>Register</Link>

@@ -1,5 +1,6 @@
 "use client";
 import { registerUser } from "@/app/actions/auth/registerUser";
+import SocialLogin from "@/app/login/componets/SocialLogin";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -23,9 +24,8 @@ const RegisterForm = () => {
 
     if (response.success) {
       toast.success(response.message);
-      router.push("/")
+      router.push("/");
       form.reset();
-
     } else {
       toast.error(response.message);
     }
@@ -87,17 +87,7 @@ const RegisterForm = () => {
       </div>
 
       {/* Social Login Buttons */}
-      <div className="flex justify-center space-x-6 text-2xl">
-        <button className="hover:scale-110 text-blue-500 transition">
-          <FaFacebook />
-        </button>
-        <button className="hover:scale-110 text-gray-200 transition">
-          <FaGithub />
-        </button>
-        <button className="hover:scale-110 text-red-500 transition">
-          <FaGoogle />
-        </button>
-      </div>
+      <SocialLogin></SocialLogin>
 
       {/* Login Link */}
       <p className="text-center text-gray-300 text-sm mt-6">
