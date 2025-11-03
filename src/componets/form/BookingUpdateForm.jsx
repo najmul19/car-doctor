@@ -1,42 +1,46 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
 const BookingUpdateForm = ({ data }) => {
-  const { data: session } = useSession();
-   console.log("fontssse:",data)
+  const router = useRouter();
+  // const { data: session } = useSession();
+  // console.log("fontssse:", data);
 
   const handleBookingService = async (e) => {
     e.preventDefault();
     const form = e.target;
-   
-    // const name = form.name.value;
-    // const email = form.email.value;
+
+    const name = form.name.value;
+    const email = form.email.value;
     // const dueAmount = form.dueAmount.value;
     const date = form.date.value;
     const phone = form.phone.value;
     const address = form.address.value;
 
     const checkoutPayload = {
-      // customerName: name,
-      // email,
+      customerName: name,
+      email,
       date,
-      // dueAmount,
       phone,
       address,
-
- 
     };
 
-    const res = await fetch("http://localhost:3000/api/service", {
-      method: "POST",
-      body: JSON.stringify(checkoutPayload),
-    });
+    const res = await fetch(
+      `http://localhost:3000/api/my-bookings/${data._id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(checkoutPayload),
+      }
+    );
     const postedResponse = await res.json();
-    // console.log("postedResponse : ", postedResponse);
+    
     toast.success("Form submitted");
+    router.push("/myBookings");
+    console.log("postedResponse : ", postedResponse);
     // form.reset();
   };
 

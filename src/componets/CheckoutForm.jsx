@@ -21,7 +21,6 @@ const CheckoutForm = ({ data }) => {
       customerName: name,
       email,
       date,
-      // dueAmount,
       phone,
       address,
 
