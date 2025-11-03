@@ -5,7 +5,7 @@ import dbConnect, { collectionNamesObj } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
-  const session = await getServerSession(authOptions); // ✅ this is correct in App Router
+  const session = await getServerSession(authOptions); 
 
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

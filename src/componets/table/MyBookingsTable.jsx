@@ -1,23 +1,9 @@
-"use client";
-
+import DeleteBookingButton from "@/app/myBookings/components/DeleteBookingButton";
 import Image from "next/image";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import Link from "next/link";
+import { FaEdit } from "react-icons/fa";
 
 const MyBookingsTable = ({ bookings }) => {
-  // 🗑️ Handle delete
-  const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this booking?")) return;
-    await fetch(`http://localhost:3000/api/service/${id}`, {
-      method: "DELETE",
-    });
-    setBookings(bookings.filter((b) => b._id !== id));
-  };
-
-  // ✏️ Handle edit (you can add modal or navigation)
-  const handleEdit = (id) => {
-    alert(`Edit booking ID: ${id}`);
-  };
-
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">
@@ -40,11 +26,12 @@ const MyBookingsTable = ({ bookings }) => {
               bookings.map((booking) => (
                 <tr
                   key={booking._id}
-                  className=" hover:bg-gray-800/40 hover:text-white transition"
+                  className=""
                 >
                   <td className="py-3 px-4">
                     <Image
-                    width={50} height={50}
+                      width={50}
+                      height={50}
                       src={booking.service_image}
                       alt={booking.service_name}
                       className="w-16 h-16 object-cover rounded-lg"
@@ -56,18 +43,16 @@ const MyBookingsTable = ({ bookings }) => {
                   <td className="py-3 px-4">{booking.date}</td>
                   <td className="py-3 px-4">${booking.service_price}</td>
                   <td className="py-3 px-4 flex items-center justify-center gap-3">
-                    <button
-                      onClick={() => handleEdit(booking._id)}
-                      className="p-2 rounded-full bg-blue-500 hover:bg-blue-600 transition"
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
+                    <Link href={`/myBookings/${booking._id}`}>
+                      <FaEdit className="h-6 w-6 font-bold hover:text-gray-400 " />
+                    </Link>
+                    {/* <button
                       onClick={() => handleDelete(booking._id)}
                       className="p-2 rounded-full bg-red-500 hover:bg-red-600 transition"
                     >
                       <FaTrash />
-                    </button>
+                    </button> */}
+                    <DeleteBookingButton id={booking._id} />
                   </td>
                 </tr>
               ))
