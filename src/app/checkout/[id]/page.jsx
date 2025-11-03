@@ -7,8 +7,8 @@ const CheckoutPage = async ({ params }) => {
   const data = await res.json();
   return (
     <div>
-      {/* {JSON.stringify(data)} */}
-      <CheckoutForm />
+      <CheckoutForm data={data}  />
+      {JSON.stringify(data)}
     </div>
   );
 };

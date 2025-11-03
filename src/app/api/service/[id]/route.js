@@ -8,3 +8,5 @@ export const GET = async (req, { params }) => {
  
   return NextResponse.json(data);
 };
+
+
