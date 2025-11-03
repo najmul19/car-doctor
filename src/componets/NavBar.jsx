@@ -52,9 +52,9 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Contact
-              </a>
+              <Link href="/myBookings" className="text-gray-600 hover:text-gray-900">
+                MyBookings
+              </Link>
             </li>
             {status == "authenticated" ? (
               <>
